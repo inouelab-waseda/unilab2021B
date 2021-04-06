@@ -2,6 +2,7 @@
 *.csproj
 *.sln
 *.vsconfig
+*.suo
 
 # made from Unity files
 /Library/
