@@ -1,0 +1,11 @@
+# made from Visual Script
+*.csproj
+*.sln
+*.vsconfig
+
+# made from Unity files
+/Library/
+/Logs/
+/Temp/
+/obj/
+/UserSettings/
