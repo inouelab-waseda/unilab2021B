@@ -3,6 +3,7 @@
 *.sln
 *.vsconfig
 *.suo
+.vs/
 
 # made from Unity files
 /Library/
