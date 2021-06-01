@@ -6,7 +6,6 @@ using UnityEngine;
 public class EnemyData : ScriptableObject
 {
 	public int maxHp;
-	public int X_Position;
-	public int Y_Position;
+	public Vector2 position;
 	public int damage;
 }

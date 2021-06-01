@@ -6,6 +6,5 @@ using UnityEngine;
 public class MainCharacterData : ScriptableObject
 {
 	public int maxHp;
-	public int X_Position;
-	public int Y_Position;
+	public Vector2 position;
 }
