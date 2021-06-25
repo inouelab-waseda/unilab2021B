@@ -270,6 +270,46 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4091230310716960062, guid: 30b4000ec5bdf284c9d89653408a6bf3,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1.1207856
+      objectReference: {fileID: 0}
+    - target: {fileID: 4091230310716960062, guid: 30b4000ec5bdf284c9d89653408a6bf3,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1.0024333
+      objectReference: {fileID: 0}
+    - target: {fileID: 4091230310716960062, guid: 30b4000ec5bdf284c9d89653408a6bf3,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.0007
+      objectReference: {fileID: 0}
+    - target: {fileID: 4091230310716960062, guid: 30b4000ec5bdf284c9d89653408a6bf3,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.0118
+      objectReference: {fileID: 0}
+    - target: {fileID: 4091230311587736065, guid: 30b4000ec5bdf284c9d89653408a6bf3,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 11.985488
+      objectReference: {fileID: 0}
+    - target: {fileID: 4091230311587736065, guid: 30b4000ec5bdf284c9d89653408a6bf3,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 7.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4091230311587736065, guid: 30b4000ec5bdf284c9d89653408a6bf3,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.038
+      objectReference: {fileID: 0}
+    - target: {fileID: 4091230311587736065, guid: 30b4000ec5bdf284c9d89653408a6bf3,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4256625701334609032, guid: 30b4000ec5bdf284c9d89653408a6bf3,
         type: 3}
       propertyPath: m_Name
@@ -447,7 +487,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -190}
+  m_AnchoredPosition: {x: 24, y: -147}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1230405076
@@ -650,7 +690,7 @@ MonoBehaviour:
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
   m_ReferenceResolution: {x: 800, y: 600}
-  m_ScreenMatchMode: 0
+  m_ScreenMatchMode: 1
   m_MatchWidthOrHeight: 0
   m_PhysicalUnit: 3
   m_FallbackScreenDPI: 96
