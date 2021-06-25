@@ -41,3 +41,6 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: GameSprites
+    uniqueID: 279256149
+    locked: 0
