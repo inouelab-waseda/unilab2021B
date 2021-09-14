@@ -1,0 +1,12 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+[CreateAssetMenu(menuName = "MyScriptable/Create StageData")]
+public class StageData : ScriptableObject
+{
+    public GameObject Stage_Tilemap;
+    public Vector2 start_position;
+    public Vector2 goal_position;
+    public EnemyData[] enemies;
+}
