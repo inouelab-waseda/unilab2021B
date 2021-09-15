@@ -9,6 +9,9 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
     private States _currentState = States.Idle;
     public States CurrentState { get { return _currentState; } }
 
+    private string _stage = null;
+    public string Stage { get { return _stage; } set { _stage = value; } }
+
     /// <summary>
     /// ゲーム現在のステート
     /// </summary>
@@ -25,6 +28,11 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
     protected override void Awake()
     {
         base.Awake();
+    }
+
+    private void Start()
+    {
+        print(_stage);
         SetState(States.Initialize);
     }
 
