@@ -6,11 +6,14 @@ using UniRx;
 public class GameManager : SingletonMonoBehaviour<GameManager>
 {
     [SerializeField]
+    public InitializeStage InitializeStage;
+    public PlayerController PlayerController;
     private States _currentState = States.Idle;
     public States CurrentState { get { return _currentState; } }
 
     private string _stage = null;
     public string Stage { get { return _stage; } set { _stage = value; } }
+    private StageData stage_data = null;
 
     /// <summary>
     /// ゲーム現在のステート
@@ -90,6 +93,14 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
     {
         Debug.Log("初期化開始");
         _currentState = States.Initialize;
+        if (_stage == null)
+        {
+            Debug.LogAssertion("読み込まれるStageがnullのため、Stage1に設定します");
+            _stage = "Stage1";
+        }
+        stage_data = InitializeStage.StartInitialize(_stage);
+        print(stage_data);
+        PlayerController.SetPlayerpos(stage_data.start_position);
         //uniRxの購読
         Debug.Log("初期化終了");
         _currentState = States.Idle;
