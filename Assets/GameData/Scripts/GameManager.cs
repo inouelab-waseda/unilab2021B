@@ -101,6 +101,9 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
         stage_data = InitializeStage.StartInitialize(_stage);
         print(stage_data);
         PlayerController.SetPlayerpos(stage_data.start_position);
+        PlayerController.SetDirection(stage_data.start_direction);
+        if (Camera.main.orthographicSize <= 0) Camera.main.orthographicSize = 10;
+        else Camera.main.orthographicSize = stage_data.cameraview;
         //uniRxの購読
         Debug.Log("初期化終了");
         _currentState = States.Idle;
