@@ -22,7 +22,12 @@ public class PlayerController : MonoBehaviour
 
     public void PlayerMove()
     {
-        //UniRxでデータを購読し、それに合わせてプレイヤーの動きを決める
+        //CommandListからイベントが飛ばされたときに、一度だけ動かす
 
+    }
+
+    public void PlayerRotate()
+    {
+        
     }
 }
