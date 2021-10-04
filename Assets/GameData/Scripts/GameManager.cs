@@ -8,6 +8,7 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
     [SerializeField]
     public InitializeStage InitializeStage;
     public PlayerController PlayerController;
+    public ActManager ActManager;
     private States _currentState = States.Idle;
     public States CurrentState { get { return _currentState; } }
 
@@ -37,13 +38,25 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
     {
         print(_stage);
         SetState(States.Initialize);
+
+        ActManager.ExecuteFinished.Delay(System.TimeSpan.FromSeconds(1.5f)).Subscribe(_ =>
+        {
+            Debug.Log("実行状態終了");
+            SetState(States.Idle);
+        });
+        PlayerController.CheckedReachedGoal.Where(x => x == stage_data.goal_position).Subscribe(_ =>
+        {
+            Debug.Log("プレイヤーがゴールに到達");
+            StopExecute();
+            SetState(States.Result);
+        });
     }
 
     public void SetState(States state)
     {
         if (state == CurrentState) return;
         if (CurrentState == States.Result) return;
-        switch(state) {
+        switch (state) {
             case States.Idle:
                 ResetPlace();
                 break;
@@ -56,12 +69,12 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
             case States.Hint:
                 break;
             case States.Result:
+                StageClear();
                 break;
             default:
                 Debug.LogWarningFormat("{}への遷移に制限がかけられていません",state.ToString());
                 break;
         }
-        _currentState = state;
     }
 
     /// <summary>
@@ -79,13 +92,23 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
     {
         Debug.Log("実行開始");
         _currentState = States.Execute;
+        ActManager.StartExecute();
+    }
+
+    //Stopボタンを押した
+    public void StopExecute()
+    {
+        if (CurrentState == States.Execute) ActManager.FinishExecute();
     }
 
     //データを初期配置に戻す
     public void ResetPlace()
     {
         Debug.Log("リセット開始");
+        PlayerController.SetPlayerpos(stage_data.start_position);
+        PlayerController.SetDirection(stage_data.start_direction);
         _currentState = States.Idle;
+        Debug.Log("リセット終了");
     }
 
     //Scriptableobjectからステージを読み込み生成する
@@ -99,14 +122,16 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
             _stage = "Stage1";
         }
         stage_data = InitializeStage.StartInitialize(_stage);
-        print(stage_data);
-        PlayerController.SetPlayerpos(stage_data.start_position);
-        PlayerController.SetDirection(stage_data.start_direction);
-        if (Camera.main.orthographicSize <= 0) Camera.main.orthographicSize = 10;
+        if (stage_data.cameraview <= 0) Camera.main.orthographicSize = 10;
         else Camera.main.orthographicSize = stage_data.cameraview;
+        ResetPlace();
         //uniRxの購読
         Debug.Log("初期化終了");
-        _currentState = States.Idle;
+    }
+
+    public void StageClear()
+    {
+        //Debug.LogFormat("{}をクリアした","test");
     }
 
 }

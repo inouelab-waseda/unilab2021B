@@ -1,12 +1,22 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UniRx;
+using System;
 
 public class PlayerController : MonoBehaviour
 {
     private GameObject player;
     [SerializeField]
     private Rotation direction;
+
+    SpriteRenderer player_spriterend;
+
+    private Subject<Vector2> playersubject = new Subject<Vector2>();
+    public IObservable<Vector2> CheckedReachedGoal
+    {
+        get { return playersubject; }
+    }
 
     public enum Rotation
     {
@@ -18,10 +28,16 @@ public class PlayerController : MonoBehaviour
 
     public Vector2 GetPlayerpos() => player.transform.position;
 
+    public void Start()
+    {
+        FindPlayer();
+        player_spriterend = player.GetComponent<SpriteRenderer>();
+
+    }
+
     public void SetPlayerpos(Vector2 pos)
     {
         if (player == null) FindPlayer();
-        Debug.Log(player);
         player.transform.position = pos;
     }
 
@@ -31,10 +47,9 @@ public class PlayerController : MonoBehaviour
         UpdateSprite();
     }
 
-    public void UpdateSprite()
+    private void UpdateSprite()
     {
-        if (player = null) FindPlayer();
-        SpriteRenderer spriterend = player.GetComponent<SpriteRenderer>();
+        if (player == null) FindPlayer();
 
         switch (direction)
         {
@@ -74,8 +89,11 @@ public class PlayerController : MonoBehaviour
             case Rotation.left:
                 player.transform.position += new Vector3(-1.0f, 0.0f);
                 break;
-        }   
-        //CommandListからイベントが飛ばされたときに、一度だけ動かす
+        }
+
+        //ゴールチェックイベントを発行する
+        //GameManagerはそのイベントを見て、まずStopを呼び出し、その後Resultへ移行する
+        playersubject.OnNext(GetPlayerpos());
 
     }
 
