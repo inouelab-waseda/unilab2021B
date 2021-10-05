@@ -12,8 +12,14 @@ public abstract class ActionCommand
         get { return actionsubject; }
     }
 
+    /// <summary>
+    /// 次に実行するコマンドの設定(nullの場合は1つ次になる)
+    /// </summary>
     public ActionCommand nextcursor = null;
-    public int scope = 0;
+
+    /// <summary>
+    /// 次のコマンドが実行されるまでの移行時間
+    /// </summary>
     public float delaytime = 1.0f;
 
     /// <summary>

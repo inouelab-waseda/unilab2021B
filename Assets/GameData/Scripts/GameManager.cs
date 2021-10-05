@@ -6,7 +6,7 @@ using UniRx;
 public class GameManager : SingletonMonoBehaviour<GameManager>
 {
     [SerializeField]
-    public InitializeStage InitializeStage;
+    public StageController StageController;
     public PlayerController PlayerController;
     public ActManager ActManager;
     private States _currentState = States.Idle;
@@ -123,7 +123,7 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
             Debug.LogAssertion("読み込まれるStageがnullのため、Stage1に設定します");
             _stage = "Stage1";
         }
-        stage_data = InitializeStage.StartInitialize(_stage);
+        stage_data = StageController.StartInitialize(_stage);
         if (stage_data.cameraview <= 0) Camera.main.orthographicSize = 10;
         else Camera.main.orthographicSize = stage_data.cameraview;
         ResetPlace();

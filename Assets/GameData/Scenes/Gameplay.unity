@@ -451,7 +451,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fac17a8381dcac54a9270aceeafae2f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  InitializeStage: {fileID: 1528241457}
+  StageController: {fileID: 1528241457}
   PlayerController: {fileID: 2085733358}
   ActManager: {fileID: 1946096509}
 --- !u!1001 &257065762
@@ -2299,7 +2299,7 @@ GameObject:
   - component: {fileID: 1528241457}
   m_Layer: 0
   m_Name: Stage
-  m_TagString: Untagged
+  m_TagString: Stage
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2493,7 +2493,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1631041470}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1946096509}
+        m_TargetAssemblyTypeName: ActManager, Assembly-CSharp
+        m_MethodName: CursorDown
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1631041470
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2920,7 +2932,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1746069657}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1946096509}
+        m_TargetAssemblyTypeName: ActManager, Assembly-CSharp
+        m_MethodName: CursorUp
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1746069657
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3811,6 +3835,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fc61691fc3319b140819a81329733298, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gameManager: {fileID: 158375398}
+  commandlist_string: []
 --- !u!4 &1946096510
 Transform:
   m_ObjectHideFlags: 0
@@ -4072,6 +4098,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   direction: 0
+  Stagecontroller: {fileID: 1528241457}
+  player_front: {fileID: 21300000, guid: f81dd94760051fc45b08061d279ed3b1, type: 3}
+  player_back: {fileID: 21300000, guid: 234470a272f87c14fbb23485db7abbea, type: 3}
+  player_right: {fileID: 21300000, guid: b8c737f95f630a347844954f033600bb, type: 3}
+  player_left: {fileID: 21300000, guid: b0c7f34e5c5d7ad48886e14f853311f6, type: 3}
 --- !u!1 &2120523991
 GameObject:
   m_ObjectHideFlags: 0
