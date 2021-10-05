@@ -126,6 +126,7 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
         stage_data = StageController.StartInitialize(_stage);
         if (stage_data.cameraview <= 0) Camera.main.orthographicSize = 10;
         else Camera.main.orthographicSize = stage_data.cameraview;
+        Camera.main.gameObject.transform.position = new Vector3(stage_data.cameratransform.x, stage_data.cameratransform.y,-10);
         ResetPlace();
         //uniRxの購読
         Debug.Log("初期化終了");

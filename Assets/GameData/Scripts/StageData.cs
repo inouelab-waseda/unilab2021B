@@ -11,4 +11,5 @@ public class StageData : ScriptableObject
     public PlayerController.Rotation start_direction;
     public EnemyData[] enemies;
     public float cameraview;
+    public Vector2 cameratransform;
 }
