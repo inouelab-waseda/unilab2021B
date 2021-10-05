@@ -27,18 +27,18 @@ public class ActManager : MonoBehaviour
     public void AddAct()
     {
         if (gameManager.CurrentState != GameManager.States.Idle) return;
-        ActionCommand action = new PassCommand();
         ActionCommand action8 = new PassCommand();
-        ActionCommand action9 = new GotoCommand(action8, 2);
-        ActionCommand action2 = new GotoCommand(action, 3);
+        ActionCommand action9 = new GotoCommand(action8, 10);
         ActionCommand action4 = new RotateCommand("right");
         ActionCommand action3 = new MoveCommand();
-        commandlist.Add(action);
+        ActionCommand action2 = new PassCommand();
+        ActionCommand action1 = new FrontCheckCommand(action2, "wall", true);
         commandlist.Add(action8);
         commandlist.Add(action3);
-        commandlist.Add(action9);
+        commandlist.Add(action1);
         commandlist.Add(action4);
         commandlist.Add(action2);
+        commandlist.Add(action9);
         //現在指定されているActionCommandをnewで作り、その結果出来たものを格納する
     }
 
@@ -48,7 +48,7 @@ public class ActManager : MonoBehaviour
         //Removeact
     }
 
-    public void ExecuteNextAction(ActionCommand action)
+    private void ExecuteNextAction(ActionCommand action)
     {
         //今さっき実行したアクションによってexecutecursorを決める
         if (action.nextcursor != null)

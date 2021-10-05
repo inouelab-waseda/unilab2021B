@@ -12,6 +12,8 @@ public class PlayerController : MonoBehaviour
 
     private SpriteRenderer player_spriterend;
 
+    public StageController Stagecontroller;
+
     public Sprite player_front;
     public Sprite player_back;
     public Sprite player_right;
@@ -33,12 +35,12 @@ public class PlayerController : MonoBehaviour
 
     public Vector2 GetPlayerpos() => player.transform.position;
 
-    public void Start()
+    /*public void Start()
     {
         FindPlayer();
         player_spriterend = player.GetComponent<SpriteRenderer>();
 
-    }
+    }*/
 
     public void SetPlayerpos(Vector2 pos)
     {
@@ -79,8 +81,26 @@ public class PlayerController : MonoBehaviour
         player = GameObject.FindWithTag("Player");
     }
 
+    public bool FrontWallExists()
+    {
+        switch (direction)
+        {
+            case Rotation.front:
+                return Stagecontroller.WallExists(player.transform.position + new Vector3(0.0f, -1.0f));
+            case Rotation.back:
+                return Stagecontroller.WallExists(player.transform.position + new Vector3(0.0f, 1.0f));
+            case Rotation.right:
+                return Stagecontroller.WallExists(player.transform.position + new Vector3(1.0f, 0.0f));
+            case Rotation.left:
+                return Stagecontroller.WallExists(player.transform.position + new Vector3(-1.0f, 0.0f));
+        }
+        Debug.LogAssertion("Rotationが例外です");
+        return true;
+    }
+
     public void PlayerMove()
     {
+        if (FrontWallExists()) return;
         switch (direction)
         {
             case Rotation.front:
@@ -116,7 +136,7 @@ public class PlayerController : MonoBehaviour
             else direction += 1;
         } else
         {
-            Debug.LogAssertion("方向設定がおかしいです");
+            Debug.LogAssertion("方向設定がrightまたはleft以外になっています");
         }
         UpdateSprite();
     }
