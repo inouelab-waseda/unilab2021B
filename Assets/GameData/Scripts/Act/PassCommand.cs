@@ -13,7 +13,7 @@ public class PassCommand : ActionCommand
 
     public override void Action()
     {
-        Debug.Log("passcommand");
+        Debug.Log("passコマンドの実行");
         actionsubject.OnNext(this);
     }
 

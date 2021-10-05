@@ -16,6 +16,7 @@ public class FrontCheckCommand : ActionCommand
         _failedcommand = failedcommand;
         _obj = obj;
         _existsflag = existsflag;
+        delaytime = 0.1f;
 
     }
 
@@ -30,7 +31,6 @@ public class FrontCheckCommand : ActionCommand
         {
 
         }
-        Debug.Log(nextcursor);
         actionsubject.OnNext(this);
     }
 

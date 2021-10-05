@@ -20,14 +20,13 @@ public class GotoCommand : ActionCommand
 
     public override void Action()
     {
-        Debug.Log("gotocommand");
+        Debug.Log("gotoコマンドの実行");
         current_loop += 1;
         if (current_loop < _loopnum) nextcursor = _nextcommand;
         else
         {
             current_loop = 0;
             nextcursor = null;
-            Debug.Log("ForEscape");
         }
 
         actionsubject.OnNext(this);

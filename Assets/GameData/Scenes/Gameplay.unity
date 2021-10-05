@@ -1884,7 +1884,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\u884C\u52D5\u3092\u9078\u629E\u3059\u308B"
+  m_Text: "\u524D\u306B1\u6B69\u9032\u3080"
 --- !u!222 &1148106099
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2496,7 +2496,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1946096509}
         m_TargetAssemblyTypeName: ActManager, Assembly-CSharp
-        m_MethodName: CursorDown
+        m_MethodName: CursorUp
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2721,11 +2721,15 @@ MonoBehaviour:
   m_Value: 0
   m_Options:
     m_Options:
-    - m_Text: "\u884C\u52D5\u3092\u9078\u629E\u3059\u308B"
+    - m_Text: "\u524D\u306B1\u6B69\u9032\u3080"
       m_Image: {fileID: 0}
-    - m_Text: "\u524D\u306B\u9032\u3080"
+    - m_Text: "\u53F3\u3092\u5411\u304F"
       m_Image: {fileID: 0}
-    - m_Text: "\uFF1F\u56DE\u7E70\u308A\u8FD4\u3059"
+    - m_Text: "\u5DE6\u3092\u5411\u304F"
+      m_Image: {fileID: 0}
+    - m_Text: "3\u56DE\u304F\u308A\u304B\u3048\u3059"
+      m_Image: {fileID: 0}
+    - m_Text: "\u524D\u306B\u58C1\u304C\u3042\u3063\u305F\u3089"
       m_Image: {fileID: 0}
   m_OnValueChanged:
     m_PersistentCalls:
@@ -2935,7 +2939,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1946096509}
         m_TargetAssemblyTypeName: ActManager, Assembly-CSharp
-        m_MethodName: CursorUp
+        m_MethodName: CursorDown
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3681,6 +3685,7 @@ GameObject:
   - component: {fileID: 1926767255}
   - component: {fileID: 1926767254}
   - component: {fileID: 1926767253}
+  - component: {fileID: 1926767257}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -3770,6 +3775,26 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &1926767257
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1926767252}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a5186a097195cfb418ef40fbe1a1f095, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  commandselect: {fileID: 1674250067}
+  input_argument: {fileID: 1502380035}
+  commandlist:
+  - movefront
+  - turnright
+  - turnleft
+  - 3times
+  - checkfrontwall
 --- !u!1 &1935198521
 GameObject:
   m_ObjectHideFlags: 0
@@ -3836,7 +3861,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameManager: {fileID: 158375398}
+  UIManager: {fileID: 1926767257}
   commandlist_string: []
+  editcursor: 0
 --- !u!4 &1946096510
 Transform:
   m_ObjectHideFlags: 0

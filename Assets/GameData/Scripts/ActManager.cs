@@ -8,6 +8,7 @@ using System.Linq;
 public class ActManager : MonoBehaviour
 {
     public GameManager gameManager;
+    public PlayUIManager UIManager;
     [SerializeField]
     private List<string> commandlist_string = new List<string> { };
 
@@ -15,7 +16,9 @@ public class ActManager : MonoBehaviour
     private List<ActionCommand> commandlist = new List<ActionCommand> { };
 
     private List<IDisposable> disposableeventlist = new List<IDisposable> { };
+    [SerializeField]
     private int editcursor = 0;
+
     private int executecursor = 0;
 
     private Subject<Unit> executesubject = new Subject<Unit>();
@@ -27,24 +30,50 @@ public class ActManager : MonoBehaviour
     public void AddAct()
     {
         if (gameManager.CurrentState != GameManager.States.Idle) return;
-        ActionCommand action8 = new PassCommand();
-        ActionCommand action9 = new GotoCommand(action8, 10);
-        ActionCommand action4 = new RotateCommand("right");
-        ActionCommand action3 = new MoveCommand();
-        ActionCommand action2 = new PassCommand();
-        ActionCommand action1 = new FrontCheckCommand(action2, "wall", true);
-        commandlist.Add(action8);
-        commandlist.Add(action3);
-        commandlist.Add(action1);
-        commandlist.Add(action4);
-        commandlist.Add(action2);
-        commandlist.Add(action9);
+
+        commandlist_string.Insert(editcursor,UIManager.GetcommandfromUI());
         //現在指定されているActionCommandをnewで作り、その結果出来たものを格納する
+        if (UIManager.GetcommandfromUI() == "movefront")
+        {
+            ActionCommand action = new MoveCommand();
+            commandlist.Insert(editcursor,action);
+        } else if (UIManager.GetcommandfromUI() == "turnright")
+        {
+            ActionCommand action = new RotateCommand("right");
+            commandlist.Insert(editcursor, action);
+        } else if (UIManager.GetcommandfromUI() == "turnleft")
+        {
+            ActionCommand action = new RotateCommand("left");
+            commandlist.Insert(editcursor, action);
+        } else if (UIManager.GetcommandfromUI() == "3times")
+        {
+            ActionCommand foraction = new PassCommand();
+            ActionCommand gotoaction = new GotoCommand(foraction, 3);
+            commandlist.Insert(editcursor, foraction);
+            CursorUp();
+            commandlist.Insert(editcursor, gotoaction);
+            commandlist_string.Insert(editcursor, "ForloopEnd");
+        } else if (UIManager.GetcommandfromUI() == "checkfrontwall")
+        {
+            ActionCommand passaction = new PassCommand();
+            ActionCommand ifaction = new FrontCheckCommand(passaction, "wall", true);
+            commandlist.Insert(editcursor, ifaction);
+            CursorUp();
+            commandlist.Insert(editcursor, passaction);
+            commandlist_string.Insert(editcursor, "IFEnd");
+        } else
+        {
+            Debug.LogAssertionFormat("{}というコマンドはないまたは実装されてません", UIManager.GetcommandfromUI());
+        }
+        CursorUp();
+
+        UpdateUI();
     }
 
     public void RemoveAct()
     {
         if (gameManager.CurrentState != GameManager.States.Idle) return;
+        UpdateUI();
         //Removeact
     }
 
@@ -54,7 +83,6 @@ public class ActManager : MonoBehaviour
         if (action.nextcursor != null)
         {
             executecursor = commandlist.IndexOf(action.nextcursor);
-            Debug.Log(executecursor);
         }
         else executecursor += 1;
 
@@ -110,7 +138,8 @@ public class ActManager : MonoBehaviour
     public void CursorUp()
     {
         if (gameManager.CurrentState != GameManager.States.Idle) return;
-        if (commandlist.Count < editcursor) editcursor += 1;
+        Debug.Log(commandlist.Count);
+        if (commandlist.Count > editcursor) editcursor += 1;
         UpdateUI();
     }
 
