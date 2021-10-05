@@ -3,19 +3,24 @@ using System.Collections.Generic;
 using UnityEngine;
 using UniRx;
 
-public class MoveCommand : ActionCommand
+public class FrontCheckCommand : ActionCommand
 {
     private PlayerController playercontroller;
+    private ActionCommand _failedcommand;
+    private string _obj;
 
-    public MoveCommand()
+    public FrontCheckCommand(ActionCommand failedcommand, string obj)
     {
         playercontroller = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
+        _failedcommand = failedcommand;
+        _obj = obj;
+
     }
 
     public override void Action()
     {
-        Debug.Log("前方に進む");
-        playercontroller.PlayerMove();
+        Debug.LogFormat("前方に{0}があるかチェック",_obj);
+        nextcursor = _failedcommand;
         actionsubject.OnNext(this);
     }
 

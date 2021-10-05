@@ -12,18 +12,17 @@ public abstract class ActionCommand
         get { return actionsubject; }
     }
 
+    public ActionCommand nextcursor = null;
+    public int scope = 0;
+    public float delaytime = 1.0f;
+
     /// <summary>
     /// そのコマンドで行われるアクションの中身(ex:Move,Rotate,Check等)
     /// </summary>
     public abstract void Action();
 
     /// <summary>
-    /// そのコマンドがCommandlist追加時に実行するべきもの(ex:if文->endも一緒に作る)
+    /// そのコマンドを初期化した際の設定
     /// </summary>
-    public abstract void Add();
-
-    /// <summary>
-    /// そのコマンドがCommandlist削除時に実行するべきもの(ex:if文->endも一緒に削除)
-    /// </summary>
-    public abstract void Remove();
+    public abstract void Initialize();
 }

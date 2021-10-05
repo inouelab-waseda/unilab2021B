@@ -10,7 +10,12 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     private Rotation direction;
 
-    SpriteRenderer player_spriterend;
+    private SpriteRenderer player_spriterend;
+
+    public Sprite player_front;
+    public Sprite player_back;
+    public Sprite player_right;
+    public Sprite player_left;
 
     private Subject<Vector2> playersubject = new Subject<Vector2>();
     public IObservable<Vector2> CheckedReachedGoal
@@ -20,10 +25,10 @@ public class PlayerController : MonoBehaviour
 
     public enum Rotation
     {
-        front,
-        back,
-        right,
-        left
+        front = 0,
+        right = 1,
+        back = 2,
+        left = 3
     };
 
     public Vector2 GetPlayerpos() => player.transform.position;
@@ -50,20 +55,21 @@ public class PlayerController : MonoBehaviour
     private void UpdateSprite()
     {
         if (player == null) FindPlayer();
+        if (player_spriterend == null) player_spriterend = player.GetComponent<SpriteRenderer>();
 
         switch (direction)
         {
             case Rotation.front:
-                //spriterend.sprite = 
+                player_spriterend.sprite = player_front;
                 break;
             case Rotation.back:
-                //player.transform.position += new Vector3(0.0f, 1.0f);
+                player_spriterend.sprite = player_back;
                 break;
             case Rotation.right:
-                //player.transform.position += new Vector3(1.0f, 0.0f);
+                player_spriterend.sprite = player_right;
                 break;
             case Rotation.left:
-                //player.transform.position += new Vector3(-1.0f, 0.0f);
+                player_spriterend.sprite = player_left;
                 break;
         }
     }
@@ -97,9 +103,21 @@ public class PlayerController : MonoBehaviour
 
     }
 
-    public void PlayerRotate()
+    public void PlayerRotate(string dir)
     {
+        if (dir == "right")
+        {
+            if (direction == Rotation.front) direction = (Rotation)3;
+            else direction -= 1;
+
+        } else if (dir == "left")
+        {
+            if (direction == Rotation.left) direction = (Rotation)0;
+            else direction += 1;
+        } else
+        {
+            Debug.LogAssertion("方向設定がおかしいです");
+        }
         UpdateSprite();
-        //CommandListからイベントが飛ばされたときに、一度だけ動かす
     }
 }

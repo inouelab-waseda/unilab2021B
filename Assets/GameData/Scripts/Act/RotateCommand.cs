@@ -3,24 +3,26 @@ using System.Collections.Generic;
 using UnityEngine;
 using UniRx;
 
-public class MoveCommand : ActionCommand
+public class RotateCommand : ActionCommand
 {
     private PlayerController playercontroller;
+    private string direction;
 
-    public MoveCommand()
+    public RotateCommand(string dir)
     {
         playercontroller = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
+        direction = dir;
     }
 
     public override void Action()
     {
-        Debug.Log("‘O•û‚Éi‚Ş");
-        playercontroller.PlayerMove();
+        Debug.LogFormat("{0}•ûŒü‚Ö‚Ü‚ª‚é",direction);
+        playercontroller.PlayerRotate(direction);
         actionsubject.OnNext(this);
     }
 
     public override void Initialize()
     {
-        
+
     }
 }

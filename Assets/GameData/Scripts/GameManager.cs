@@ -90,6 +90,7 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
     //UIで設定した通りにプレイヤーが動き始める
     public void StartExecute()
     {
+        if (_currentState != States.Idle) return;
         Debug.Log("実行開始");
         _currentState = States.Execute;
         ActManager.StartExecute();
@@ -99,6 +100,7 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
     public void StopExecute()
     {
         if (CurrentState == States.Execute) ActManager.FinishExecute();
+        else if (CurrentState == States.Idle) ActManager.ResetCommand();
     }
 
     //データを初期配置に戻す
@@ -131,7 +133,7 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
 
     public void StageClear()
     {
-        //Debug.LogFormat("{}をクリアした","test");
+        Debug.Log(stage_data.name);
     }
 
 }
