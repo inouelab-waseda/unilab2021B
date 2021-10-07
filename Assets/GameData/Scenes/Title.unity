@@ -485,7 +485,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\u30B9\u30C6\u30FC\u30B8\u305B\u3093\u305F\u304F\u304C\u3081\u3093\u306B\u3059\u3059\u3080"
+  m_text: "\u30B9\u30C6\u30FC\u30B8\u305B\u3093\u305F\u304F\u304C\u3081\u3093"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 7f7350c1139d800469e588806be2c629, type: 2}
   m_sharedMaterial: {fileID: -5004027789937352520, guid: 7f7350c1139d800469e588806be2c629,
@@ -641,6 +641,7 @@ GameObject:
   - component: {fileID: 1783129742}
   - component: {fileID: 1783129741}
   - component: {fileID: 1783129740}
+  - component: {fileID: 1783129743}
   m_Layer: 5
   m_Name: StartButton
   m_TagString: Untagged
@@ -711,7 +712,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1783129741}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1783129743}
+        m_TargetAssemblyTypeName: SceneLoader, Assembly-CSharp
+        m_MethodName: Move_to_MenuScene
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1783129741
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -750,6 +763,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1783129738}
   m_CullTransparentMesh: 1
+--- !u!114 &1783129743
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1783129738}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 80c4d17aa15ba6049829f5ac33ab77f1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1794185643
 GameObject:
   m_ObjectHideFlags: 0
