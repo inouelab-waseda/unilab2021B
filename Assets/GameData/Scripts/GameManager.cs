@@ -9,6 +9,7 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
     public StageController StageController;
     public PlayerController PlayerController;
     public ActManager ActManager;
+    public PlayUIManager UIManager;
     private States _currentState = States.Idle;
     public States CurrentState { get { return _currentState; } }
 
@@ -134,7 +135,9 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
 
     public void StageClear()
     {
+        _currentState = States.Result;
         Debug.Log(stage_data.name);
+        UIManager.StageClear();
     }
 
 }

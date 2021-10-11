@@ -50,8 +50,8 @@ public class ActManager : MonoBehaviour
             commandlist.Insert(editcursor, action);
         } else if (UIManager.GetcommandfromUI() == "forloop")
         {
-            ActionCommand foraction = new PassCommand("forStart", scope+1, 3);
-            ActionCommand gotoaction = new GotoCommand("forEnd", scope+1, foraction, 3);
+            ActionCommand foraction = new PassCommand("forStart", scope + 1, int.Parse(UIManager.GetInputdata()));
+            ActionCommand gotoaction = new GotoCommand("forEnd", scope+1, foraction, int.Parse(UIManager.GetInputdata()));
             commandlist.Insert(editcursor, foraction);
             CursorUp();
             commandlist.Insert(editcursor, gotoaction);
@@ -134,6 +134,7 @@ public class ActManager : MonoBehaviour
 
     private void ExecuteNextAction(ActionCommand action)
     {
+
         //現在のexecutecursorの示すUIの更新
         UIManager.executeCursorOff(executecursor);
 
@@ -182,6 +183,8 @@ public class ActManager : MonoBehaviour
 
     public void FinishExecute()
     {
+        UIManager.executeCursorOff(executecursor);
+
         //現在ある全コマンドのactionfinishedイベントの購読を停止する
         foreach (IDisposable events in disposableeventlist)
         {

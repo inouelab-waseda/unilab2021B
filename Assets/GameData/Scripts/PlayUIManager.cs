@@ -18,6 +18,8 @@ public class PlayUIManager : MonoBehaviour
     [SerializeField]
     private GameObject editcursorprefab;
     [SerializeField]
+    private GameObject clearpopup;
+    [SerializeField]
     private List<Color> colorlist;
 
     private GameObject cursorobj;
@@ -27,11 +29,11 @@ public class PlayUIManager : MonoBehaviour
     private Dictionary<string, string> actnamedata = new Dictionary<string, string>()
     {
         {"movefront","‚Ü‚¦‚É‚¢‚Á‚Û‚·‚·‚Þ"},
-        {"turnright","‚Ý‚¬‚É‚Ü‚ª‚é"},
-        {"turnleft","‚Ð‚¾‚è‚É‚Ü‚ª‚é"},
+        {"turnright","‚Ý‚¬‚É‚Þ‚­"},
+        {"turnleft","‚Ð‚¾‚è‚É‚Þ‚­"},
         {"forStart","n‰ñ‚­‚è‚©‚¦‚·"},
         {"forEnd","‚±‚±‚Ü‚Å"},
-        {"IfStart","obj‚É‚Ô‚Â‚©‚Á‚½‚ç"},
+        {"IfStart","‚Ü‚¦‚Éobj‚ª‚ ‚Á‚½‚ç"},
         {"IfEnd","‚±‚±‚Ü‚Å"}
     };
 
@@ -47,6 +49,17 @@ public class PlayUIManager : MonoBehaviour
         cursorobj = content.transform.Find("editcursor").gameObject;
     }
 
+    public void DropdownChanged()
+    {
+        if (GetcommandfromUI() == "forloop")
+        {
+            input_argument.gameObject.SetActive(true);
+            input_argument.text = "3";
+            return;
+        }
+        input_argument.gameObject.SetActive(false);
+    }
+
     public void MoveeditCursor(int cursor)
     {
         if (cursorobj == null)
@@ -58,12 +71,14 @@ public class PlayUIManager : MonoBehaviour
 
     public void executeCursorOn(int cursor)
     {
-        content.transform.GetChild(cursor).Find("executecursor").gameObject.SetActive(true);
+        var executecursor = content.transform.GetChild(cursor).Find("executecursor");
+        if (executecursor != null) executecursor.gameObject.SetActive(true);
     }
 
     public void executeCursorOff(int cursor)
     {
-        content.transform.GetChild(cursor).Find("executecursor").gameObject.SetActive(false);
+        var executecursor = content.transform.GetChild(cursor).Find("executecursor");
+        if (executecursor != null) executecursor.gameObject.SetActive(false);
     }
 
     public void DisplayCommandlist(List<ActionCommand> commandlist)
@@ -125,5 +140,10 @@ public class PlayUIManager : MonoBehaviour
     {
         cursorobj.SetActive(true);
         MoveeditCursor(cursor);
+    }
+
+    public void StageClear()
+    {
+        clearpopup.SetActive(true);
     }
 }
