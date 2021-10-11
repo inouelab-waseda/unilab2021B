@@ -18,10 +18,5 @@ MonoBehaviour:
   goal_position: {x: -4, y: -7}
   start_direction: 0
   enemies: []
-<<<<<<< HEAD
   cameraview: 6
   cameratransform: {x: -1, y: -2}
-=======
-  cameraview: 5
-  cameratransform: {x: -2, y: -3}
->>>>>>> a9413be34c25580e68e7665067597eb055a8edae
