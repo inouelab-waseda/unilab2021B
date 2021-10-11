@@ -7,7 +7,7 @@ public class MoveCommand : ActionCommand
 {
     private PlayerController playercontroller;
 
-    public MoveCommand()
+    public MoveCommand(string commandname, int scope) : base(commandname, scope)
     {
         playercontroller = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
     }

@@ -31,36 +31,37 @@ public class ActManager : MonoBehaviour
     {
         if (gameManager.CurrentState != GameManager.States.Idle) return;
 
-        commandlist_string.Insert(editcursor,UIManager.GetcommandfromUI());
+        int scope;
+        if (editcursor <= 0) scope = 0;
+        else scope = commandlist[editcursor - 1].nextscope;
+
         //現在指定されているActionCommandをnewで作り、その結果出来たものを格納する
         if (UIManager.GetcommandfromUI() == "movefront")
         {
-            ActionCommand action = new MoveCommand();
+            ActionCommand action = new MoveCommand(UIManager.GetcommandfromUI(),scope);
             commandlist.Insert(editcursor,action);
         } else if (UIManager.GetcommandfromUI() == "turnright")
         {
-            ActionCommand action = new RotateCommand("right");
+            ActionCommand action = new RotateCommand(UIManager.GetcommandfromUI(), scope, "right");
             commandlist.Insert(editcursor, action);
         } else if (UIManager.GetcommandfromUI() == "turnleft")
         {
-            ActionCommand action = new RotateCommand("left");
+            ActionCommand action = new RotateCommand(UIManager.GetcommandfromUI(), scope, "left");
             commandlist.Insert(editcursor, action);
-        } else if (UIManager.GetcommandfromUI() == "3times")
+        } else if (UIManager.GetcommandfromUI() == "forloop")
         {
-            ActionCommand foraction = new PassCommand();
-            ActionCommand gotoaction = new GotoCommand(foraction, 3);
+            ActionCommand foraction = new PassCommand("forStart", scope+1, 3);
+            ActionCommand gotoaction = new GotoCommand("forEnd", scope+1, foraction, 3);
             commandlist.Insert(editcursor, foraction);
             CursorUp();
             commandlist.Insert(editcursor, gotoaction);
-            commandlist_string.Insert(editcursor, "ForloopEnd");
-        } else if (UIManager.GetcommandfromUI() == "checkfrontwall")
+        } else if (UIManager.GetcommandfromUI() == "IFstart")
         {
-            ActionCommand passaction = new PassCommand();
-            ActionCommand ifaction = new FrontCheckCommand(passaction, "wall", true);
+            ActionCommand passaction = new PassCommand("IfEnd", scope+1);
+            ActionCommand ifaction = new FrontCheckCommand("IfStart", scope+1, passaction, "wall", true);
             commandlist.Insert(editcursor, ifaction);
             CursorUp();
             commandlist.Insert(editcursor, passaction);
-            commandlist_string.Insert(editcursor, "IFEnd");
         } else
         {
             Debug.LogAssertionFormat("{}というコマンドはないまたは実装されてません", UIManager.GetcommandfromUI());
@@ -73,12 +74,69 @@ public class ActManager : MonoBehaviour
     public void RemoveAct()
     {
         if (gameManager.CurrentState != GameManager.States.Idle) return;
+        if (editcursor <= 0) return;
+        if ((commandlist[editcursor - 1].commandname == "IfStart") || (commandlist[editcursor - 1].commandname == "forStart"))
+        {
+            int pairindex = 0;
+            for (int i = editcursor; i < commandlist.Count; i++)
+            {
+                if (commandlist[editcursor - 1].scope == commandlist[i].scope)
+                {
+                    if ((commandlist[i].commandname == "IfEnd") || (commandlist[i].commandname == "forEnd"))
+                    {
+                        pairindex = i;
+                        break;
+                    }
+                }
+            }
+            ScopeDownRange(editcursor - 1, pairindex);
+            commandlist.RemoveAt(pairindex);
+            commandlist.RemoveAt(editcursor - 1);
+
+        } else if ((commandlist[editcursor - 1].commandname == "IfEnd") || (commandlist[editcursor - 1].commandname == "forEnd"))
+        {
+            int pairindex = 0;
+            for (int i = editcursor - 2; i >= 0; i--)
+            {
+                if (commandlist[editcursor - 1].scope == commandlist[i].scope)
+                {
+                    if ((commandlist[i].commandname == "IfStart") || (commandlist[i].commandname == "forStart"))
+                    {
+                        pairindex = i;
+                        break;
+                    }
+                }
+            }
+            //scopeダウンの設定
+            ScopeDownRange(pairindex, editcursor - 1);
+            commandlist.RemoveAt(editcursor - 1);
+            commandlist.RemoveAt(pairindex);
+            CursorDown();
+        }
+        else
+        {
+            commandlist.RemoveAt(editcursor - 1);
+        }
+
+        CursorDown();
+
         UpdateUI();
-        //Removeact
+    }
+
+    private void ScopeDownRange(int start, int end)
+    {
+
+        for (int i = start; i <= end; i++)
+        {
+            commandlist[i].scopeDown();
+        }
     }
 
     private void ExecuteNextAction(ActionCommand action)
     {
+        //現在のexecutecursorの示すUIの更新
+        UIManager.executeCursorOff(executecursor);
+
         //今さっき実行したアクションによってexecutecursorを決める
         if (action.nextcursor != null)
         {
@@ -91,6 +149,9 @@ public class ActManager : MonoBehaviour
             FinishExecute();
             return;
         }
+
+        //次のexecutecursorの示すUIの更新
+        UIManager.executeCursorOn(executecursor);
 
         print("Movetonextaction");
         commandlist[executecursor].Action();
@@ -114,6 +175,8 @@ public class ActManager : MonoBehaviour
         }
 
         executecursor = 0;
+        UIManager.Deleteeditcursor();
+        UIManager.executeCursorOn(0);
         commandlist[0].Action();
     }
 
@@ -125,33 +188,47 @@ public class ActManager : MonoBehaviour
             events.Dispose();
         }
         disposableeventlist.Clear();
+        UIManager.Appeareditcursor(editcursor);
         executesubject.OnNext(Unit.Default);
     }
 
     public void ResetCommand()
     {
         if (gameManager.CurrentState != GameManager.States.Idle) return;
+        editcursor = 0;
         commandlist.Clear();
+        commandlist_string.Clear();
         UpdateUI();
     }
 
     public void CursorUp()
     {
         if (gameManager.CurrentState != GameManager.States.Idle) return;
-        Debug.Log(commandlist.Count);
-        if (commandlist.Count > editcursor) editcursor += 1;
-        UpdateUI();
+        if (commandlist.Count <= editcursor) return;
+        editcursor += 1;
+        UIManager.MoveeditCursor(editcursor);
     }
 
     public void CursorDown()
     {
         if (gameManager.CurrentState != GameManager.States.Idle) return;
-        if (editcursor > 0) editcursor -= 1;
-        UpdateUI();
+        if (editcursor <= 0) return;
+        editcursor -= 1;
+        UIManager.MoveeditCursor(editcursor);
     }
 
     public void UpdateUI()
     {
+
+        if (gameManager.CurrentState == GameManager.States.Idle)
+        {
+            commandlist_string = commandlist.Select(_ => _.scope.ToString()).ToList();
+            UIManager.DisplayCommandlist(commandlist);
+            UIManager.MoveeditCursor(editcursor);
+            //Listからデータを生成
+            //Cursorの位置をずらす
+        }
+        else return;
         //UpdateUI
     }
 }

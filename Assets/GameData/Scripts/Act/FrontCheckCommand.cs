@@ -10,13 +10,12 @@ public class FrontCheckCommand : ActionCommand
     private string _obj;
     private bool _existsflag;
 
-    public FrontCheckCommand(ActionCommand failedcommand, string obj, bool existsflag)
+    public FrontCheckCommand(string commandname, int scope, ActionCommand failedcommand, string obj, bool existsflag) : base(commandname, scope, 0.1f)
     {
         playercontroller = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
         _failedcommand = failedcommand;
         _obj = obj;
         _existsflag = existsflag;
-        delaytime = 0.1f;
 
     }
 
@@ -25,8 +24,8 @@ public class FrontCheckCommand : ActionCommand
         Debug.LogFormat("前方に{0}があるかチェックし、{1}のとき通す",_obj,_existsflag);
         if (_obj == "wall")
         {
-            if (playercontroller.FrontWallExists() != _existsflag) nextcursor = _failedcommand;
-            else nextcursor = null;
+            if (playercontroller.FrontWallExists() != _existsflag) _nextcursor = _failedcommand;
+            else _nextcursor = null;
         } else if (_obj == "enemy")
         {
 
@@ -36,7 +35,12 @@ public class FrontCheckCommand : ActionCommand
 
     public override void Initialize()
     {
-        nextcursor = null;
+        _nextcursor = null;
         
+    }
+
+    public string Getobjname()
+    {
+        return _obj;
     }
 }

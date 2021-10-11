@@ -5,10 +5,12 @@ using UniRx;
 
 public class PassCommand : ActionCommand
 {
+    private int _memodata;
+    public int memodata { get { return _memodata; } }
 
-    public PassCommand()
+    public PassCommand(string commandname, int scope, int memo = 0) : base(commandname,scope,0.1f)
     {
-        delaytime = 0.1f;
+        _memodata = memo;
     }
 
     public override void Action()
