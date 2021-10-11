@@ -71,7 +71,6 @@ public class PlayUIManager : MonoBehaviour
         foreach (Transform child in content.gameObject.transform)
         {
             Destroy(child.gameObject);
-            Debug.Log(child);
         }
         content.gameObject.transform.DetachChildren();
 
@@ -87,7 +86,6 @@ public class PlayUIManager : MonoBehaviour
             actiontext.text = Getname(action);
             //BackGround‚Ìİ’è
             Image background = commandUI.transform.Find("background").GetComponent<Image>();
-            Debug.Log(colorlist[action.scope % colorlist.Count]);
             background.color = colorlist[action.scope % colorlist.Count];
 
             //scopeêŠ‚Ìİ’è
