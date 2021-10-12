@@ -2857,11 +2857,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-<<<<<<< HEAD
       - m_Target: {fileID: 673067405}
-=======
-      - m_Target: {fileID: 963748369}
->>>>>>> origin/プレイ画面の実装2
         m_TargetAssemblyTypeName: SceneLoader, Assembly-CSharp
         m_MethodName: Move_to_GameScene
         m_Mode: 5
