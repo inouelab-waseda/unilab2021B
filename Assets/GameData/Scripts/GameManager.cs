@@ -110,6 +110,7 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
         Debug.Log("リセット開始");
         PlayerController.SetPlayerpos(stage_data.start_position);
         PlayerController.SetDirection(stage_data.start_direction);
+        StageController.InitializeEnemy();
         _currentState = States.Idle;
         Debug.Log("リセット終了");
     }

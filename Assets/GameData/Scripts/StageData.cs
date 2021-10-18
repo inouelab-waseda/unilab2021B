@@ -9,7 +9,7 @@ public class StageData : ScriptableObject
     public Vector2 start_position;
     public Vector2 goal_position;
     public PlayerController.Rotation start_direction;
-    public EnemyData[] enemies;
+    public List<EnemyData> enemies;
     public float cameraview;
     public Vector2 cameratransform;
 }

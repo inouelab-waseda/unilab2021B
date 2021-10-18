@@ -98,6 +98,23 @@ public class PlayerController : MonoBehaviour
         return true;
     }
 
+    public bool FrontEnemyExists()
+    {
+        switch (direction)
+        {
+            case Rotation.front:
+                return Stagecontroller.EnemyExists(player.transform.position + new Vector3(0.0f, -1.0f));
+            case Rotation.back:
+                return Stagecontroller.EnemyExists(player.transform.position + new Vector3(0.0f, 1.0f));
+            case Rotation.right:
+                return Stagecontroller.EnemyExists(player.transform.position + new Vector3(1.0f, 0.0f));
+            case Rotation.left:
+                return Stagecontroller.EnemyExists(player.transform.position + new Vector3(-1.0f, 0.0f));
+        }
+        Debug.LogAssertion("Rotationが例外です");
+        return true;
+    }
+
     public void PlayerMove()
     {
         if (FrontWallExists()) return;
@@ -116,6 +133,9 @@ public class PlayerController : MonoBehaviour
                 player.transform.position += new Vector3(-1.0f, 0.0f);
                 break;
         }
+
+        if (Stagecontroller.EnemyExists(GetPlayerpos())) Debug.Log("GameOver");
+
 
         //ゴールチェックイベントを発行する
         //GameManagerはそのイベントを見て、まずStopを呼び出し、その後Resultへ移行する

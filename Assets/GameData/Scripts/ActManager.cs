@@ -55,10 +55,17 @@ public class ActManager : MonoBehaviour
             commandlist.Insert(editcursor, foraction);
             CursorUp();
             commandlist.Insert(editcursor, gotoaction);
-        } else if (UIManager.GetcommandfromUI() == "IFstart")
+        } else if (UIManager.GetcommandfromUI() == "IFstartwall")
         {
             ActionCommand passaction = new PassCommand("IfEnd", scope+1);
             ActionCommand ifaction = new FrontCheckCommand("IfStart", scope+1, passaction, "wall", true);
+            commandlist.Insert(editcursor, ifaction);
+            CursorUp();
+            commandlist.Insert(editcursor, passaction);
+        } else if (UIManager.GetcommandfromUI() == "IFstartenemy")
+        {
+            ActionCommand passaction = new PassCommand("IfEnd", scope + 1);
+            ActionCommand ifaction = new FrontCheckCommand("IfStart", scope + 1, passaction, "enemy", true);
             commandlist.Insert(editcursor, ifaction);
             CursorUp();
             commandlist.Insert(editcursor, passaction);
