@@ -17,6 +17,10 @@ MonoBehaviour:
   start_position: {x: 0, y: 0}
   goal_position: {x: 7, y: -4}
   start_direction: 1
-  enemies: []
+  enemies:
+  - {fileID: 11400000, guid: 6d1aeac4a77cdce41bdfff8a8334e7ec, type: 2}
+  - {fileID: 11400000, guid: b728cbaaf799f62499501b5ffdb3e32b, type: 2}
+  - {fileID: 11400000, guid: 346ab3e2a7d1f1249ae7b07712e363cc, type: 2}
+  - {fileID: 11400000, guid: 7c4b363f1f029584aa2f9b7526117aef, type: 2}
   cameraview: 6
   cameratransform: {x: 5, y: -4}
