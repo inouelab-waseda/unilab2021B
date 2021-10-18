@@ -4117,11 +4117,6 @@ MonoBehaviour:
       m_Image: {fileID: 0}
     - m_Text: "\u307E\u3048\u306B\u304B\u3079\u304C\u3042\u3063\u305F\u3089"
       m_Image: {fileID: 0}
-<<<<<<< HEAD
-    - m_Text: "\u307E\u3048\u306B\u3066\u304D\u304C\u3044\u305F\u3089"
-      m_Image: {fileID: 0}
-=======
->>>>>>> 26a6942941c3b7e3378db38765d9bfd0e8cdd330
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
