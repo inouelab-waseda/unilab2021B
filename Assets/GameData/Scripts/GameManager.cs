@@ -51,6 +51,11 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
             StopExecute();
             SetState(States.Result);
         });
+        PlayerController.GameOver.Subscribe(_ =>
+        {
+            Debug.Log("ゲームオーバー");
+            StopExecute();
+        });
     }
 
     public void SetState(States state)
