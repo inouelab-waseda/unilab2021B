@@ -69,6 +69,10 @@ public class ActManager : MonoBehaviour
             commandlist.Insert(editcursor, ifaction);
             CursorUp();
             commandlist.Insert(editcursor, passaction);
+        } else if (UIManager.GetcommandfromUI() == "Attack")
+        {
+            ActionCommand action = new AttackCommand(UIManager.GetcommandfromUI(), scope);
+            commandlist.Insert(editcursor, action);
         } else
         {
             Debug.LogAssertionFormat("{}‚Æ‚¢‚¤ƒRƒ}ƒ“ƒh‚Í‚È‚¢‚Ü‚½‚ÍŽÀ‘•‚³‚ê‚Ä‚Ü‚¹‚ñ", UIManager.GetcommandfromUI());

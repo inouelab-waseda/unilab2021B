@@ -33,8 +33,9 @@ public class PlayUIManager : MonoBehaviour
         {"turnleft","‚Ð‚¾‚è‚É‚Þ‚­"},
         {"forStart","n‰ñ‚­‚è‚©‚¦‚·"},
         {"forEnd","‚±‚±‚Ü‚Å"},
-        {"IfStart","‚Ü‚¦‚Éobj‚ª‚ ‚Á‚½‚ç"},
-        {"IfEnd","‚±‚±‚Ü‚Å"}
+        {"IfStart","‚Ü‚¦‚Éobj‚ç"},
+        {"IfEnd","‚±‚±‚Ü‚Å"},
+        {"Attack","‚±‚¤‚°‚«‚·‚é" }
     };
 
     [SerializeField]
@@ -116,9 +117,9 @@ public class PlayUIManager : MonoBehaviour
         string text = actnamedata[command.commandname];
         if (command.commandname == "forStart") text = text.Replace("n",((PassCommand)command).memodata.ToString());
         if (command.commandname == "IfStart") {
-            if (((FrontCheckCommand)command).Getobjname() == "wall") text = text.Replace("obj","‚©‚×");
-            else if (((FrontCheckCommand)command).Getobjname() == "enemy") text = text.Replace("obj", "‚Ä‚«");
-            else text = text.Replace("obj", "‚È‚É‚©"); ;
+            if (((FrontCheckCommand)command).Getobjname() == "wall") text = text.Replace("obj","‚©‚×‚ª‚ ‚Á‚½");
+            else if (((FrontCheckCommand)command).Getobjname() == "enemy") text = text.Replace("obj", "‚Ä‚«‚ª‚¢‚½");
+            else text = text.Replace("obj", "‚È‚É‚©‚ª‚¢‚½"); ;
         }
         return text;
     }

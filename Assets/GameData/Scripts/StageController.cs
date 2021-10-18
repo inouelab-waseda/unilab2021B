@@ -65,4 +65,23 @@ public class StageController : MonoBehaviour
         enemiesobj.Clear();
         MakeEnemy();
     }
+
+    public GameObject GetEnemy(Vector3 pos)
+    {
+        if (enemiesobj == null) return null;
+        foreach (var e in enemiesobj)
+        {
+            if (e is null) continue;
+            if (e.transform.position == pos) return e;
+        }
+        return null;
+    }
+
+    public void RemoveEnemy(Vector3 pos)
+    {
+        var e = GetEnemy(pos);
+        if (e is null) return;
+        enemiesobj.Remove(e);
+        Destroy(e);
+    }
 }

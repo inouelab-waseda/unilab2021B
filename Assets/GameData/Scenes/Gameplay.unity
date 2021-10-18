@@ -3991,6 +3991,8 @@ MonoBehaviour:
       m_Image: {fileID: 0}
     - m_Text: "\u307E\u3048\u306B\u3066\u304D\u304C\u3044\u305F\u3089"
       m_Image: {fileID: 0}
+    - m_Text: "\u3053\u3046\u3052\u304D\u3059\u308B"
+      m_Image: {fileID: 0}
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
@@ -5087,6 +5089,7 @@ MonoBehaviour:
   - forloop
   - IFstartwall
   - IFstartenemy
+  - Attack
 --- !u!1 &1935198521
 GameObject:
   m_ObjectHideFlags: 0

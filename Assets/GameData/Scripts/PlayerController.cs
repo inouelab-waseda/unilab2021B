@@ -25,6 +25,12 @@ public class PlayerController : MonoBehaviour
         get { return playersubject; }
     }
 
+    private Subject<Unit> gameoversubject = new Subject<Unit>();
+    public IObservable<Unit> GameOver
+    {
+        get { return gameoversubject; }
+    }
+
     public enum Rotation
     {
         front = 0,
@@ -134,7 +140,7 @@ public class PlayerController : MonoBehaviour
                 break;
         }
 
-        if (Stagecontroller.EnemyExists(GetPlayerpos())) Debug.Log("GameOver");
+        if (Stagecontroller.EnemyExists(GetPlayerpos())) gameoversubject.OnNext(Unit.Default);
 
 
         //ゴールチェックイベントを発行する
@@ -159,5 +165,25 @@ public class PlayerController : MonoBehaviour
             Debug.LogAssertion("方向設定がrightまたはleft以外になっています");
         }
         UpdateSprite();
+    }
+
+    public void PlayerAttack()
+    {
+        if (!FrontEnemyExists()) return;
+        switch (direction)
+        {
+            case Rotation.front:
+                Stagecontroller.RemoveEnemy(player.transform.position + new Vector3(0.0f, -1.0f));
+                break;
+            case Rotation.back:
+                Stagecontroller.RemoveEnemy(player.transform.position + new Vector3(0.0f, 1.0f));
+                break;
+            case Rotation.right:
+                Stagecontroller.RemoveEnemy(player.transform.position + new Vector3(1.0f, 0.0f));
+                break;
+            case Rotation.left:
+                Stagecontroller.RemoveEnemy(player.transform.position + new Vector3(-1.0f, 0.0f));
+                break;
+        }
     }
 }
