@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyimage: {fileID: 7755572062920628452, guid: 9360de675c9756044b531602ac873266,
     type: 3}
-  maxHp: 0
-  position: {x: 0, y: 0}
+  maxHp: 1
+  position: {x: 7, y: 0}
   damage: 0
