@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 45017e5644656a546889bd860845b068, type: 3}
   m_Name: Stage6_3
   m_EditorClassIdentifier: 
-  enemyimage: {fileID: 7755572062920628452, guid: 9360de675c9756044b531602ac873266,
+  enemyimage: {fileID: 7755572062920628452, guid: 899266471d6511e4b9464f352c4be68d,
     type: 3}
   maxHp: 1
   position: {x: 0, y: -5}
