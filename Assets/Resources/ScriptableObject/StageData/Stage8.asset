@@ -12,10 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: adbae6a4a3f59d1469df8bb016a84e03, type: 3}
   m_Name: Stage8
   m_EditorClassIdentifier: 
-  Stage_Tilemap: {fileID: 0}
+  Stage_Tilemap: {fileID: 7653906039597214652, guid: 97b79208097d47945b221dbcdfb26323,
+    type: 3}
   start_position: {x: 0, y: 0}
-  goal_position: {x: 0, y: 0}
-  start_direction: 0
-  enemies: []
-  cameraview: 10
-  cameratransform: {x: 0, y: 0}
+  goal_position: {x: 0, y: 4}
+  start_direction: 2
+  enemies:
+  - {fileID: 11400000, guid: 662864dd43c0ea243be81c427692762c, type: 2}
+  - {fileID: 11400000, guid: 276839622f1474d428d50ae3acb6b28c, type: 2}
+  cameraview: 6
+  cameratransform: {x: 0, y: 3}
