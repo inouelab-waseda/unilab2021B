@@ -9,6 +9,7 @@ public class StageController : MonoBehaviour
     private StageData stage_data;
     private const string assetpath = "ScriptableObject/StageData/";
     private GameObject stageobj;
+    private GameObject goalflag;
     private List<GameObject> enemiesobj = new List<GameObject> { };
     private Tilemap walltile;
 
@@ -18,6 +19,7 @@ public class StageController : MonoBehaviour
         if (stage_data == null) Debug.LogAssertion("Failure at ResouceLoad");
         MakeStage(stage_data.Stage_Tilemap);
         MakeEnemy();
+        MakeGoal();
         return stage_data;
     }
 
@@ -35,6 +37,12 @@ public class StageController : MonoBehaviour
             enemyobj.transform.parent = this.gameObject.transform;
             enemiesobj.Add(enemyobj);
         }
+    }
+
+    private void MakeGoal()
+    {
+        if (goalflag == null) goalflag = this.transform.Find("goal").gameObject;
+        goalflag.transform.position = stage_data.goal_position;
     }
 
     public bool WallExists(Vector3 pos)
