@@ -8,7 +8,7 @@ public class AttackCommand : ActionCommand
     private PlayerController playercontroller;
     private string direction;
 
-    public AttackCommand(string commandname, int scope) : base(commandname, scope)
+    public AttackCommand(string commandname, int scope) : base(commandname, scope,0.9f)
     {
         playercontroller = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
     }
