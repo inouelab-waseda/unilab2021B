@@ -15,8 +15,8 @@ MonoBehaviour:
   Stage_Tilemap: {fileID: 1804572284102968168, guid: 76b72fc78ba2c1c4e80b122d1f1b8a0c,
     type: 3}
   start_position: {x: 0, y: 0}
-  goal_position: {x: 0, y: -7}
+  goal_position: {x: 0, y: -6}
   start_direction: 1
   enemies: []
-  cameraview: 6
-  cameratransform: {x: 5, y: -4}
+  cameraview: 5
+  cameratransform: {x: 3, y: -3}

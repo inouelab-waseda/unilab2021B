@@ -15,5 +15,5 @@ MonoBehaviour:
   enemyimage: {fileID: 7755572062920628452, guid: 899266471d6511e4b9464f352c4be68d,
     type: 3}
   maxHp: 1
-  position: {x: 10, y: 0}
+  position: {x: 4, y: 0}
   damage: 0
