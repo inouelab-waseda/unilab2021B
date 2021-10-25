@@ -13,6 +13,9 @@ public class StageController : MonoBehaviour
     private List<GameObject> enemiesobj = new List<GameObject> { };
     private Tilemap walltile;
 
+    [SerializeField]
+    private Sprite goalstage16;
+
     public StageData StartInitialize(string stage_num)
     {
         stage_data = Resources.Load<StageData>(assetpath + stage_num);
@@ -43,6 +46,10 @@ public class StageController : MonoBehaviour
     {
         if (goalflag == null) goalflag = this.transform.Find("goal").gameObject;
         goalflag.transform.position = stage_data.goal_position;
+        if (stage_data.name == "Stage16")
+        {
+            goalflag.GetComponent<SpriteRenderer>().sprite = goalstage16;
+        }
     }
 
     public bool WallExists(Vector3 pos)
