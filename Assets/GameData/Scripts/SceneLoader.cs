@@ -45,4 +45,9 @@ public class SceneLoader : MonoBehaviour
         gameManager.Stage = next_stage;
         SceneManager.sceneLoaded -= GameSceneLoaded;
     }
+
+    public void Quit()
+    {
+        Application.Quit();
+    }
 }

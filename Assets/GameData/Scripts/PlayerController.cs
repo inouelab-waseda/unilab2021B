@@ -89,36 +89,34 @@ public class PlayerController : MonoBehaviour
 
     public bool FrontWallExists()
     {
-        switch (direction)
-        {
-            case Rotation.front:
-                return Stagecontroller.WallExists(player.transform.position + new Vector3(0.0f, -1.0f));
-            case Rotation.back:
-                return Stagecontroller.WallExists(player.transform.position + new Vector3(0.0f, 1.0f));
-            case Rotation.right:
-                return Stagecontroller.WallExists(player.transform.position + new Vector3(1.0f, 0.0f));
-            case Rotation.left:
-                return Stagecontroller.WallExists(player.transform.position + new Vector3(-1.0f, 0.0f));
-        }
-        Debug.LogAssertion("Rotationが例外です");
-        return true;
+        return Stagecontroller.WallExists(GetFrontpos());
     }
 
     public bool FrontEnemyExists()
     {
+        return Stagecontroller.EnemyExists(GetFrontpos());
+    }
+
+    public bool FrontHoleExists()
+    {
+        return Stagecontroller.HoleExists(GetFrontpos());
+    }
+
+    public Vector3 GetFrontpos()
+    {
         switch (direction)
         {
             case Rotation.front:
-                return Stagecontroller.EnemyExists(player.transform.position + new Vector3(0.0f, -1.0f));
+                return player.transform.position + new Vector3(0.0f, -1.0f);
             case Rotation.back:
-                return Stagecontroller.EnemyExists(player.transform.position + new Vector3(0.0f, 1.0f));
+                return player.transform.position + new Vector3(0.0f, 1.0f);
             case Rotation.right:
-                return Stagecontroller.EnemyExists(player.transform.position + new Vector3(1.0f, 0.0f));
+                return player.transform.position + new Vector3(1.0f, 0.0f);
             case Rotation.left:
-                return Stagecontroller.EnemyExists(player.transform.position + new Vector3(-1.0f, 0.0f));
+                return player.transform.position + new Vector3(-1.0f, 0.0f);
         }
         Debug.LogAssertion("Rotationが例外です");
-        return true;
+        return player.transform.position;
     }
 
     public void PlayerMove()
@@ -141,6 +139,7 @@ public class PlayerController : MonoBehaviour
         }
 
         if (Stagecontroller.EnemyExists(GetPlayerpos())) gameoversubject.OnNext(Unit.Default);
+        if (Stagecontroller.HoleExists(GetPlayerpos())) gameoversubject.OnNext(Unit.Default);
 
 
         //ゴールチェックイベントを発行する

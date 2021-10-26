@@ -119,6 +119,7 @@ public class PlayUIManager : MonoBehaviour
         if (command.commandname == "IfStart") {
             if (((FrontCheckCommand)command).Getobjname() == "wall") text = text.Replace("obj","‚©‚×‚ª‚ ‚Á‚½");
             else if (((FrontCheckCommand)command).Getobjname() == "enemy") text = text.Replace("obj", "‚Ä‚«‚ª‚¢‚½");
+            else if (((FrontCheckCommand)command).Getobjname() == "hole") text = text.Replace("obj", "—Ž‚Æ‚µŒŠ‚ª‚ ‚Á‚½");
             else text = text.Replace("obj", "‚È‚É‚©‚ª‚¢‚½"); ;
         }
         return text;

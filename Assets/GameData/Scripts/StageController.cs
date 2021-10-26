@@ -15,6 +15,8 @@ public class StageController : MonoBehaviour
 
     [SerializeField]
     private Sprite goalstage16;
+    [SerializeField]
+    private GameObject holeobject;
 
     public StageData StartInitialize(string stage_num)
     {
@@ -22,6 +24,7 @@ public class StageController : MonoBehaviour
         if (stage_data == null) Debug.LogAssertion("Failure at ResouceLoad");
         MakeStage(stage_data.Stage_Tilemap);
         MakeEnemy();
+        MakeHole();
         MakeGoal();
         return stage_data;
     }
@@ -52,6 +55,15 @@ public class StageController : MonoBehaviour
         }
     }
 
+    public void MakeHole()
+    {
+        foreach (var holepos in stage_data.holes)
+        {
+            var holeobj = Instantiate(holeobject ,holepos, Quaternion.identity) as GameObject;
+            holeobj.transform.parent = this.gameObject.transform;
+        }
+    }
+
     public bool WallExists(Vector3 pos)
     {
         if (walltile == null) walltile = stageobj.transform.Find("Wall").GetComponent<Tilemap>();
@@ -66,6 +78,16 @@ public class StageController : MonoBehaviour
         {
             if (e is null) continue;
             if (e.transform.position == pos) return true;
+        }
+        return false;
+    }
+
+    public bool HoleExists(Vector3 pos)
+    {
+        if (stage_data.holes == null) return false;
+        foreach (var hole in stage_data.holes)
+        {
+            if (hole == new Vector2(pos.x,pos.y)) return true;
         }
         return false;
     }

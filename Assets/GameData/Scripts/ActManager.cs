@@ -73,6 +73,14 @@ public class ActManager : MonoBehaviour
         {
             ActionCommand action = new AttackCommand(UIManager.GetcommandfromUI(), scope);
             commandlist.Insert(editcursor, action);
+        }
+        else if (UIManager.GetcommandfromUI() == "IFstarthole")
+        {
+            ActionCommand passaction = new PassCommand("IfEnd", scope + 1);
+            ActionCommand ifaction = new FrontCheckCommand("IfStart", scope + 1, passaction, "hole", true);
+            commandlist.Insert(editcursor, ifaction);
+            CursorUp();
+            commandlist.Insert(editcursor, passaction);
         } else
         {
             Debug.LogAssertionFormat("{}‚Æ‚¢‚¤ƒRƒ}ƒ“ƒh‚Í‚È‚¢‚Ü‚½‚ÍŽÀ‘•‚³‚ê‚Ä‚Ü‚¹‚ñ", UIManager.GetcommandfromUI());

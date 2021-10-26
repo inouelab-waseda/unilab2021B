@@ -30,6 +30,10 @@ public class FrontCheckCommand : ActionCommand
         {
             if (playercontroller.FrontEnemyExists() != _existsflag) _nextcursor = _failedcommand;
             else _nextcursor = null;
+        } else if (_obj == "hole")
+        {
+            if (playercontroller.FrontHoleExists() != _existsflag) _nextcursor = _failedcommand;
+            else _nextcursor = null;
         }
         actionsubject.OnNext(this);
     }
