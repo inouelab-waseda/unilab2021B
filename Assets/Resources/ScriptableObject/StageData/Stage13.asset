@@ -16,7 +16,7 @@ MonoBehaviour:
     type: 3}
   start_position: {x: 0, y: 2}
   goal_position: {x: 8, y: 10}
-  start_direction: 0
+  start_direction: 2
   enemies: []
   holes: []
   cameraview: 6

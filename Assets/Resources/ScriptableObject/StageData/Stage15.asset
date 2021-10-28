@@ -14,10 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Stage_Tilemap: {fileID: 3924965562671002490, guid: 53a7faf91cff2424d96aa65e0da83ce5,
     type: 3}
-  start_position: {x: 0, y: 0}
-  goal_position: {x: 0, y: 0}
-  start_direction: 0
+  start_position: {x: 0, y: 2}
+  goal_position: {x: 8, y: 12}
+  start_direction: 2
   enemies: []
   holes: []
-  cameraview: 10
-  cameratransform: {x: 0, y: 0}
+  cameraview: 8
+  cameratransform: {x: 2, y: 7}

@@ -23,5 +23,5 @@ MonoBehaviour:
   holes:
   - {x: 7, y: -4}
   - {x: 6, y: -10}
-  cameraview: 8
-  cameratransform: {x: 6, y: -6}
+  cameraview: 4
+  cameratransform: {x: 0, y: 2}
