@@ -20,5 +20,8 @@ MonoBehaviour:
   enemies:
   - {fileID: 11400000, guid: 831fe80b27c3bfd48812b1193d2da41a, type: 2}
   - {fileID: 11400000, guid: 1e1832d63016d6846b891a5987fff635, type: 2}
+  holes:
+  - {x: 7, y: -4}
+  - {x: 6, y: -10}
   cameraview: 8
   cameratransform: {x: 6, y: -6}
