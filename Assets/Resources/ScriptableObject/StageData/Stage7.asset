@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: adbae6a4a3f59d1469df8bb016a84e03, type: 3}
   m_Name: Stage7
   m_EditorClassIdentifier: 
-  Stage_Tilemap: {fileID: 3924965562671002490, guid: 78715dc927c4cf24688a2d081544520f,
+  Stage_Tilemap: {fileID: 3924965562671002490, guid: 5881bd10bcbd6ae43bddcb59e5b45734,
     type: 3}
   start_position: {x: 0, y: 0}
   goal_position: {x: 3, y: -4}
