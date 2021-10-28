@@ -18,14 +18,12 @@ MonoBehaviour:
   goal_position: {x: 8, y: -2}
   start_direction: 2
   enemies:
-  - {fileID: 11400000, guid: fbcb0e7a39cc31b49a7ff8e8b05198b4, type: 2}
-  - {fileID: 11400000, guid: 09c5dfa4da0f4e34382e0cb0e96b48db, type: 2}
-  - {fileID: 11400000, guid: b784ba8071c045c43af7e0a3b19fa446, type: 2}
-  - {fileID: 11400000, guid: c94cb990ba21d5f44b86411d9d298e38, type: 2}
-  - {fileID: 11400000, guid: 07bb986728c02fc47bcaeed72a9b3070, type: 2}
-  - {fileID: 11400000, guid: 0fdc389b9a36574478abe51723d7874c, type: 2}
+  - {fileID: 11400000, guid: 2c800861e49b0594a993729ec8bc4f37, type: 2}
+  - {fileID: 11400000, guid: 1187653f268257844923ffcea6babfea, type: 2}
+  - {fileID: 11400000, guid: 6f2ddce5cce37694ab0ce589b1366b89, type: 2}
   holes:
-  - {x: 8, y: 4}
-  - {x: 0, y: 5}
-  cameraview: 6
-  cameratransform: {x: 5, y: -4}
+  - {x: 0, y: 0}
+  - {x: 6, y: -2}
+  - {x: 4, y: -7}
+  cameraview: 5
+  cameratransform: {x: 5, y: -3.5}
