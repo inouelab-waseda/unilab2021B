@@ -15,13 +15,15 @@ MonoBehaviour:
   Stage_Tilemap: {fileID: 3924965562671002490, guid: 7e63222d4cffb824ebb64885a478fef8,
     type: 3}
   start_position: {x: 0, y: 0}
-  goal_position: {x: 11, y: -7}
-  start_direction: 0
+  goal_position: {x: 0, y: 12}
+  start_direction: 3
   enemies:
-  - {fileID: 11400000, guid: 831fe80b27c3bfd48812b1193d2da41a, type: 2}
-  - {fileID: 11400000, guid: 1e1832d63016d6846b891a5987fff635, type: 2}
+  - {fileID: 11400000, guid: fbcb0e7a39cc31b49a7ff8e8b05198b4, type: 2}
+  - {fileID: 11400000, guid: b784ba8071c045c43af7e0a3b19fa446, type: 2}
+  - {fileID: 11400000, guid: 09c5dfa4da0f4e34382e0cb0e96b48db, type: 2}
+  - {fileID: 11400000, guid: c94cb990ba21d5f44b86411d9d298e38, type: 2}
   holes:
-  - {x: 7, y: -4}
-  - {x: 6, y: -10}
+  - {x: -4, y: 5}
+  - {x: -6, y: 10}
   cameraview: 7
-  cameratransform: {x: 5, y: -6}
+  cameratransform: {x: -4, y: 6}

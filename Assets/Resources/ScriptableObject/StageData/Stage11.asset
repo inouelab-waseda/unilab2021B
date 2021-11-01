@@ -21,7 +21,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 662864dd43c0ea243be81c427692762c, type: 2}
   - {fileID: 11400000, guid: 276839622f1474d428d50ae3acb6b28c, type: 2}
   holes:
-  - {x: 7, y: -4}
-  - {x: 6, y: -10}
+  - {x: 0, y: 3}
   cameraview: 4
   cameratransform: {x: 0, y: 2.5}
