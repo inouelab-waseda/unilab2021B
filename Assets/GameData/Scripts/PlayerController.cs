@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UniRx;
 using System;
+using DG.Tweening;
 
 public class PlayerController : MonoBehaviour
 {
@@ -18,6 +19,9 @@ public class PlayerController : MonoBehaviour
     public Sprite player_back;
     public Sprite player_right;
     public Sprite player_left;
+
+    public Sprite[] player_attackimage;
+    public Sprite player_deathimage;
 
     private Subject<Vector2> playersubject = new Subject<Vector2>();
     public IObservable<Vector2> CheckedReachedGoal
@@ -64,6 +68,7 @@ public class PlayerController : MonoBehaviour
     {
         if (player == null) FindPlayer();
         if (player_spriterend == null) player_spriterend = player.GetComponent<SpriteRenderer>();
+        player_spriterend.color = player_spriterend.color += new Color(0, 0, 0, 1.0f);
 
         switch (direction)
         {
@@ -138,14 +143,33 @@ public class PlayerController : MonoBehaviour
                 break;
         }
 
-        if (Stagecontroller.EnemyExists(GetPlayerpos())) gameoversubject.OnNext(Unit.Default);
-        if (Stagecontroller.HoleExists(GetPlayerpos())) gameoversubject.OnNext(Unit.Default);
+        if (Stagecontroller.EnemyExists(GetPlayerpos())) {
+            GotoGameOver();
+        }
+        if (Stagecontroller.HoleExists(GetPlayerpos()))
+        {
+            GotoGameOver();
+        }
 
 
         //ゴールチェックイベントを発行する
         //GameManagerはそのイベントを見て、まずStopを呼び出し、その後Resultへ移行する
         playersubject.OnNext(GetPlayerpos());
 
+    }
+
+    public void GotoGameOver()
+    {
+        if (player_spriterend == null) player_spriterend = player.GetComponent<SpriteRenderer>();
+        player_spriterend.sprite = player_deathimage;
+        GameOverAnimation();
+        gameoversubject.OnNext(Unit.Default);
+    }
+
+    public void GameOverAnimation()
+    {
+        player_spriterend.DOFade(endValue: 0f, duration: 1f);
+        this.transform.DOLocalMoveY(0.5f, 1f).SetRelative();
     }
 
     public void PlayerRotate(string dir)
@@ -169,19 +193,28 @@ public class PlayerController : MonoBehaviour
     public void PlayerAttack()
     {
         if (!FrontEnemyExists()) return;
+        if (player_spriterend == null) player_spriterend = player.GetComponent<SpriteRenderer>();
         switch (direction)
         {
             case Rotation.front:
                 Stagecontroller.RemoveEnemy(player.transform.position + new Vector3(0.0f, -1.0f));
+                player_spriterend.sprite = player_attackimage[0];
+                Invoke("UpdateSprite", 0.5f);
                 break;
             case Rotation.back:
                 Stagecontroller.RemoveEnemy(player.transform.position + new Vector3(0.0f, 1.0f));
+                player_spriterend.sprite = player_attackimage[1];
+                Invoke("UpdateSprite", 0.5f);
                 break;
             case Rotation.right:
                 Stagecontroller.RemoveEnemy(player.transform.position + new Vector3(1.0f, 0.0f));
+                player_spriterend.sprite = player_attackimage[2];
+                Invoke("UpdateSprite", 0.5f);
                 break;
             case Rotation.left:
                 Stagecontroller.RemoveEnemy(player.transform.position + new Vector3(-1.0f, 0.0f));
+                player_spriterend.sprite = player_attackimage[3];
+                Invoke("UpdateSprite", 0.5f);
                 break;
         }
     }

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UniRx;
 
 public class AttackCommand : ActionCommand
@@ -10,7 +11,8 @@ public class AttackCommand : ActionCommand
 
     public AttackCommand(string commandname, int scope) : base(commandname, scope,0.9f)
     {
-        playercontroller = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
+        GameObject player = GameObject.FindGameObjectWithTag("Player");
+        playercontroller = player.GetComponent<PlayerController>();
     }
 
     public override void Action()
