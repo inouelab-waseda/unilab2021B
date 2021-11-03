@@ -18,9 +18,7 @@ MonoBehaviour:
   goal_position: {x: 10, y: 0}
   start_direction: 1
   enemies:
-  - {fileID: 11400000, guid: 0992a11d33be0854bb6518827690818e, type: 2}
   - {fileID: 11400000, guid: cfd1845b27f2bf04aba8ce328e62779c, type: 2}
-  - {fileID: 11400000, guid: 98687fdf9ecd48f45b759375e4365fb8, type: 2}
   holes: []
   cameraview: 5
   cameratransform: {x: 5, y: 0}

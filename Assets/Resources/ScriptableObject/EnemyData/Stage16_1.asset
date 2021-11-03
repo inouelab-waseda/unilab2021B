@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 45017e5644656a546889bd860845b068, type: 3}
-  m_Name: Stage8_2
+  m_Name: Stage16_1
   m_EditorClassIdentifier: 
-  enemyimage: {fileID: 7755572062920628452, guid: 58ac759a5c4433848b9bcad593a84948,
+  enemyimage: {fileID: 7755572062920628452, guid: dd05d9708d377234cb2713645f6fbe8d,
     type: 3}
   maxHp: 1
-  position: {x: 1, y: 5}
+  position: {x: 5, y: 8}
   damage: 0
